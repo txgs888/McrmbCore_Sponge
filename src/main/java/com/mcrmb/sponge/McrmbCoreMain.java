@@ -1,20 +1,23 @@
 package com.mcrmb.sponge;
 
-import com.google.inject.Inject;
+import com.sun.javaws.security.Resource;
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.plugin.Plugin;
-
-import java.util.logging.Logger;
 
 /**
  * Created by txgs888 on 2017/4/12.
  */
 
-@Plugin(id = "com.mcrmb.sponge", name = "Mcrmb", version = "1.0.1")
-public class McrmbCoreMain extends PluginLogger {
+@Plugin(id = McrmbPluginInfo.ID, name = McrmbPluginInfo.NAME, version = McrmbPluginInfo.VERSION, authors = {McrmbPluginInfo.AUTHORS})
+public class McrmbCoreMain extends JavaPlugin {
+
+    @Override
     @Listener
     public void onServerStart(GameStartedServerEvent event) {
+        super.onServerStart(event);
         getLogger().info("HelloWorld");
+
     }
 }
