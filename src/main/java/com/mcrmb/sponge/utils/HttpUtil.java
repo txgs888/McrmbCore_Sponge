@@ -1,6 +1,9 @@
 package com.mcrmb.sponge.utils;
 
-import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.mcrmb.sponge.McrmbCoreMain;
+import com.mcrmb.sponge.mcrmb.McrmbPluginInfo;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -20,38 +23,18 @@ public class HttpUtil {
      * @return json
      * @throws IOException HTTP请求异常
      */
-    public static String get(String url) throws IOException {
+    public static JsonObject get(String url) throws IOException {
+        if (McrmbPluginInfo.config.logApi) {
+            McrmbCoreMain.info("发起请求: " + api + url);
+        }
         OkHttpClient client = getHttpClient();
         Request request = new Request.Builder()
                 .url(api + url)
+                .header("User-Agent", "Java")
                 .get()
                 .build();
         Response response = client.newCall(request).execute();
-        System.out.println("请求:" + api + url);
-        System.out.println("返回:" + response.body().string());
-        return response.body().string();
-    }
-
-    /***
-     * get请求mcrmbAPI并且转换成Object
-     * @param url API
-     * @param formatClass 要转换的对象class
-     * @return Object
-     * @throws IOException HTTP请求异常
-     */
-    public static <T> T get(String url, Class<T> formatClass) throws IOException {
-        String json = get(url);
-        return format(json, formatClass);
-    }
-
-    /***
-     * 将json转换为Object
-     * @param json json字符串
-     * @param formatClass 要转换的对象class
-     * @return Object
-     */
-    public static <T> T format(String json, Class<T> formatClass) {
-        return new Gson().fromJson(json, formatClass);
+        return new JsonParser().parse(response.body().string()).getAsJsonObject();
     }
 
     /***
