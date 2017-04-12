@@ -1,4 +1,4 @@
-package com.mcrmb.sponge;
+package com.mcrmb.sponge.mcrmb;
 
 /**
  * Created by txgs888 on 2017/4/12.

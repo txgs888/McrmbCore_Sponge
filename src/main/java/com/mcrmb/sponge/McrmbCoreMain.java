@@ -1,7 +1,7 @@
 package com.mcrmb.sponge;
 
-import com.sun.javaws.security.Resource;
-import org.spongepowered.api.Sponge;
+import com.mcrmb.sponge.mcrmb.JavaPlugin;
+import com.mcrmb.sponge.mcrmb.McrmbPluginInfo;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.plugin.Plugin;
@@ -12,12 +12,17 @@ import org.spongepowered.api.plugin.Plugin;
 
 @Plugin(id = McrmbPluginInfo.ID, name = McrmbPluginInfo.NAME, version = McrmbPluginInfo.VERSION, authors = {McrmbPluginInfo.AUTHORS})
 public class McrmbCoreMain extends JavaPlugin {
+    private static McrmbCoreMain instance;
+
+    public static McrmbCoreMain instance() {
+        return instance;
+    }
 
     @Override
     @Listener
     public void onServerStart(GameStartedServerEvent event) {
+        instance = this;
         super.onServerStart(event);
         getLogger().info("HelloWorld");
-
     }
 }
