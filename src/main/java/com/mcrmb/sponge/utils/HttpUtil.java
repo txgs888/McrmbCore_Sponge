@@ -27,6 +27,8 @@ public class HttpUtil {
                 .get()
                 .build();
         Response response = client.newCall(request).execute();
+        System.out.println("请求:" + api + url);
+        System.out.println("返回:" + response.body().string());
         return response.body().string();
     }
 
@@ -37,7 +39,7 @@ public class HttpUtil {
      * @return Object
      * @throws IOException HTTP请求异常
      */
-    public static Object get(String url, Class formatClass) throws IOException {
+    public static <T> T get(String url, Class<T> formatClass) throws IOException {
         String json = get(url);
         return format(json, formatClass);
     }
@@ -48,7 +50,7 @@ public class HttpUtil {
      * @param formatClass 要转换的对象class
      * @return Object
      */
-    public static Object format(String json, Class formatClass) {
+    public static <T> T format(String json, Class<T> formatClass) {
         return new Gson().fromJson(json, formatClass);
     }
 
