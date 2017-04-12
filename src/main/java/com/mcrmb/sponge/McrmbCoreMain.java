@@ -1,10 +1,13 @@
 package com.mcrmb.sponge;
 
+import com.mcrmb.sponge.mcrmb.ConfigManager;
 import com.mcrmb.sponge.mcrmb.JavaPlugin;
 import com.mcrmb.sponge.mcrmb.McrmbPluginInfo;
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.text.Text;
 
 /**
  * Created by txgs888 on 2017/4/12.
@@ -23,6 +26,10 @@ public class McrmbCoreMain extends JavaPlugin {
     public void onServerStart(GameStartedServerEvent event) {
         instance = this;
         super.onServerStart(event);
-        getLogger().info("HelloWorld");
+        getLogger().info("正在加载插件...");
+        ConfigManager.init();
+        McrmbPluginInfo.initMcrmbCore();
+
+        getLogger().info("加载完成!");
     }
 }

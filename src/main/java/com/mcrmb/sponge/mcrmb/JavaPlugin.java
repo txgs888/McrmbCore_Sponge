@@ -25,7 +25,7 @@ public class JavaPlugin {
         this.plugin = Sponge.getPluginManager().getPlugin(McrmbPluginInfo.ID).get();
         this.logger = plugin.getLogger();
         getPath().toFile().mkdirs();
-        ConfigManager.init();
+
     }
 
     @Inject

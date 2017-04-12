@@ -65,9 +65,9 @@ public class ConfigManager {
             setDefaultValue(config, "null", "key");
             setDefaultValue(config, true, "logApi"); //key尽量不要包括下划线! 否则在配置文件会被加上引号,显示为 "key"=xxx
             setDefaultValue(config, true, "renewOnJoin");
-            setDefaultValue(config, new ArrayList<String>(), "opModifyWhite-list");
+            setDefaultValue(config, new ArrayList<String>(), "opModifyWhiteList");
             setDefaultValue(config, "点券", "point");
-            setDefaultValue(config, "§a[§e点券中心§a] §2", "prefix");
+            setDefaultValue(config, "&a[&e点券中心&a] &2", "prefix");
         }
 
         configManager.save();
