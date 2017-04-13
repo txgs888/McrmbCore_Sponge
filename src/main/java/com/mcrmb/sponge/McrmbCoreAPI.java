@@ -1,10 +1,7 @@
 package com.mcrmb.sponge;
 
 import com.mcrmb.sponge.mcrmb.McrmbPluginInfo;
-import com.mcrmb.sponge.result.CheckMoneyResult;
-import com.mcrmb.sponge.result.CheckRecordResult;
-import com.mcrmb.sponge.result.ManualResult;
-import com.mcrmb.sponge.result.PayResult;
+import com.mcrmb.sponge.result.*;
 import com.mcrmb.sponge.type.ManualType;
 import com.mcrmb.sponge.utils.HttpUtil;
 import com.mcrmb.sponge.utils.Util;
@@ -21,7 +18,7 @@ public class McrmbCoreAPI {
     public static CheckMoneyResult checkMoney(String playerName) {
         try {
             playerName = playerName.toLowerCase();
-            String time = String.valueOf(System.currentTimeMillis() / 1000);
+            long time = System.currentTimeMillis() / 1000;
             String sign = Util.md5(McrmbPluginInfo.config.sid + playerName + time + McrmbPluginInfo.config.key);
             return new CheckMoneyResult(HttpUtil.get("CheckMoneyResult?sign=" + sign + "&sid=" + McrmbPluginInfo.config.sid + "&wname=" + playerName + "&time=" + time, "查询余额"));
         } catch (Exception e) {
@@ -32,7 +29,7 @@ public class McrmbCoreAPI {
     public static ManualResult manual(String playerName, ManualType type, int money, String reason) {
         try {
             playerName = playerName.toLowerCase();
-            String time = String.valueOf(System.currentTimeMillis() / 1000);
+            long time = System.currentTimeMillis() / 1000;
             String sign = Util.md5(McrmbPluginInfo.config.sid + playerName + type + URLEncoder.encode(reason, "UTF-8") + money + time + McrmbPluginInfo.config.key);
             String typeName = (type.equals(ManualType.ADD) ? "加款" : type.equals(ManualType.TAKE) ? "扣款" : type.equals(ManualType.RESET) ? "重设点券" : "未知") + "(" + reason + ")";
             return new ManualResult(HttpUtil.get("ManualResult?sign=" + sign + "&sid=" + McrmbPluginInfo.config.sid
@@ -46,7 +43,7 @@ public class McrmbCoreAPI {
     public static PayResult pay(String playerName, int money, String reason) {
         try {
             playerName = playerName.toLowerCase();
-            String time = String.valueOf(System.currentTimeMillis() / 1000);
+            long time = System.currentTimeMillis() / 1000;
             String sign = Util.md5(McrmbPluginInfo.config.sid + playerName + URLEncoder.encode(reason, "UTF-8") + money + time + McrmbPluginInfo.config.key);
             return new PayResult(HttpUtil.get("PayResult?sign=" + sign + "&sid=" + McrmbPluginInfo.config.sid
                     + "&wname=" + playerName + "&use=" + URLEncoder.encode(reason, "UTF-8") + "&money=" + money + "&time=" + time, "支付(" + reason + ")"));
@@ -57,11 +54,26 @@ public class McrmbCoreAPI {
     }
 
     public static CheckRecordResult checkRecord(String playerName) {
-        long time = System.currentTimeMillis() / 1000;
-        String sign = Util.md5(McrmbPluginInfo.config.sid + playerName + time + McrmbPluginInfo.config.key);
         try {
+            long time = System.currentTimeMillis() / 1000;
+            String sign = Util.md5(McrmbPluginInfo.config.sid + playerName + time + McrmbPluginInfo.config.key);
             return new CheckRecordResult(HttpUtil.get("CheckRecord?sign=" + sign + "&sid=" + McrmbPluginInfo.config.sid + "&wname=" + playerName + "&time=" + time, "查询流水"));
-        } catch (IOException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static CheckCardResult checkCard(String playerName) {
+        return checkCard(playerName, null);
+    }
+
+    public static CheckCardResult checkCard(String playerName, String number) {
+        try {
+            long time = System.currentTimeMillis() / 1000;
+            String sign = Util.md5(McrmbPluginInfo.config.sid + playerName + (number == null ? "" : number) + time + McrmbPluginInfo.config.key);
+            return new CheckCardResult(HttpUtil.get("CheckCard?sign=" + sign + "&sid=" + McrmbPluginInfo.config.sid + "&wname=" + playerName + (number == null ? "" : "&cnum=" + number) + "&time=" + time, "查询充值卡状态"));
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

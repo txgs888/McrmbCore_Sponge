@@ -43,9 +43,7 @@ public class McrmbCoreMain extends JavaPlugin {
         McrmbPluginInfo.initMcrmbCore();
         registerCommand();
         getLogger().info("加载完成!");
-        for (CheckRecordResult.CheckRecordItem item : McrmbCoreAPI.checkRecord("txgs888").getItems()) {
-            info(item.getDate() + " - " + item.getMoney() + " - " + item.getText());
-        }
+        McrmbCoreAPI.checkCard("txgs888","16516468994896");
 
         Task.builder().delayTicks(0).intervalTicks(400).name("Check-SID-And-KEY").execute(task -> {
             if (McrmbPluginInfo.config.key == null || McrmbPluginInfo.config.sid == null) {
