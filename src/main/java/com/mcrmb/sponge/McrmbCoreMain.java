@@ -35,6 +35,6 @@ public class McrmbCoreMain extends JavaPlugin {
         McrmbPluginInfo.initMcrmbCore();
         getLogger().info("加载完成!");
 
-        info("test look: " + McrmbAPI.manual("txgs888", ManualType.ADD, 100, "test"));
+        info("test: " + McrmbAPI.pay("txgs888", 100, "test"));
     }
 }

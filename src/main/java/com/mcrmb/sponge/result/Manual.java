@@ -10,9 +10,4 @@ public class Manual extends Result {
     public Manual(JsonObject json) {
         super(json);
     }
-
-    @Override
-    public String toString() {
-        return getMsg();
-    }
 }

@@ -44,4 +44,9 @@ public class Result {
     private int code;
     private String msg;
     private List<JsonObject> data;
+
+    @Override
+    public String toString() {
+        return getMsg();
+    }
 }

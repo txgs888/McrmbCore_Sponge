@@ -9,9 +9,12 @@ public class CheckMoney extends Result {
 
     public CheckMoney(JsonObject json) {
         super(json);
-        this.money = getData().get("money").getAsInt();
-        this.allcharge = getData().get("allcharge").getAsInt();
-        this.allpay = getData().get("allpay").getAsInt();
+        if (getData() != null) {
+            this.money = getData().get("money").getAsInt();
+            this.allcharge = getData().get("allcharge").getAsInt();
+            this.allpay = getData().get("allpay").getAsInt();
+        }
+
     }
 
     public int getMoney() {
@@ -26,12 +29,7 @@ public class CheckMoney extends Result {
         return allpay;
     }
 
-    private int money;
-    private int allcharge;
-    private int allpay;
-
-    @Override
-    public String toString() {
-        return getMsg();
-    }
+    private int money = -1;
+    private int allcharge = -1;
+    private int allpay = -1;
 }

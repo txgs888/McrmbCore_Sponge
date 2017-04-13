@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class HttpUtil {
     private final static String api = "http://api.mcrmb.com/Api/";
-    private final static String java_version = System.getProperty("java.version");
+    private final static String java_version = "Java_" + System.getProperty("java.version");
     private final static String os = System.getProperty("os.name") + "_" + System.getProperty("os.arch") + "_" + System.getProperty("os.version");
 
     /***
