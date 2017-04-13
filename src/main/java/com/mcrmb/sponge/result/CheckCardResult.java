@@ -33,6 +33,22 @@ public class CheckCardResult extends Result {
             this.status = object.get("status").getAsInt();
         }
 
+        public long getDate() {
+            return date;
+        }
+
+        public String getNum() {
+            return num;
+        }
+
+        public int getMoney() {
+            return money;
+        }
+
+        public int getStatus() {
+            return status;
+        }
+
         private long date;
         private String num;
         private int money;
