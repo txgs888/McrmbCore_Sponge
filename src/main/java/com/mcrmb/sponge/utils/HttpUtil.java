@@ -16,21 +16,25 @@ import java.io.IOException;
  */
 public class HttpUtil {
     private final static String api = "http://api.mcrmb.com/Api/";
+    private final static String java_version = System.getProperty("java.version");
+    private final static String os = System.getProperty("os.name") + "_" + System.getProperty("os.arch") + "_" + System.getProperty("os.version");
 
     /***
      * get请求mcrmbAPI
      * @param url API
+     * @param reason 理由
      * @return json
      * @throws IOException HTTP请求异常
      */
-    public static JsonObject get(String url) throws IOException {
+    public static JsonObject get(String url, String reason) throws IOException {
         if (McrmbPluginInfo.config.logApi) {
-            McrmbCoreMain.info("发起请求: " + api + url);
+            McrmbCoreMain.info("发起" + reason + "请求: " + api + url);
         }
         OkHttpClient client = getHttpClient();
         Request request = new Request.Builder()
                 .url(api + url)
-                .header("User-Agent", "Java")
+                .header("User-Agent", java_version)
+                .header("OS-Info", os)
                 .get()
                 .build();
         Response response = client.newCall(request).execute();
