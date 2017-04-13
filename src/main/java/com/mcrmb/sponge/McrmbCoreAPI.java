@@ -2,12 +2,14 @@ package com.mcrmb.sponge;
 
 import com.mcrmb.sponge.mcrmb.McrmbPluginInfo;
 import com.mcrmb.sponge.result.CheckMoneyResult;
+import com.mcrmb.sponge.result.CheckRecordResult;
 import com.mcrmb.sponge.result.ManualResult;
 import com.mcrmb.sponge.result.PayResult;
 import com.mcrmb.sponge.type.ManualType;
 import com.mcrmb.sponge.utils.HttpUtil;
 import com.mcrmb.sponge.utils.Util;
 
+import java.io.IOException;
 import java.net.URLEncoder;
 
 /**
@@ -49,6 +51,17 @@ public class McrmbCoreAPI {
             return new PayResult(HttpUtil.get("PayResult?sign=" + sign + "&sid=" + McrmbPluginInfo.config.sid
                     + "&wname=" + playerName + "&use=" + URLEncoder.encode(reason, "UTF-8") + "&money=" + money + "&time=" + time, "支付(" + reason + ")"));
         } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static CheckRecordResult checkRecord(String playerName) {
+        long time = System.currentTimeMillis() / 1000;
+        String sign = Util.md5(McrmbPluginInfo.config.sid + playerName + time + McrmbPluginInfo.config.key);
+        try {
+            return new CheckRecordResult(HttpUtil.get("CheckRecord?sign=" + sign + "&sid=" + McrmbPluginInfo.config.sid + "&wname=" + playerName + "&time=" + time, "查询流水"));
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
