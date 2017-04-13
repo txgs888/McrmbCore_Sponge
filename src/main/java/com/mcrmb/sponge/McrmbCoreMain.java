@@ -3,6 +3,7 @@ package com.mcrmb.sponge;
 import com.mcrmb.sponge.mcrmb.ConfigManager;
 import com.mcrmb.sponge.mcrmb.JavaPlugin;
 import com.mcrmb.sponge.mcrmb.McrmbPluginInfo;
+import com.mcrmb.sponge.type.ManualType;
 import org.slf4j.Logger;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
@@ -34,6 +35,6 @@ public class McrmbCoreMain extends JavaPlugin {
         McrmbPluginInfo.initMcrmbCore();
         getLogger().info("加载完成!");
 
-        info("test look: " + McrmbAPI.look("txgs888"));
+        info("test look: " + McrmbAPI.manual("txgs888", ManualType.ADD, 100, "test"));
     }
 }

@@ -29,4 +29,9 @@ public class CheckMoney extends Result {
     private int money;
     private int allcharge;
     private int allpay;
+
+    @Override
+    public String toString() {
+        return getMsg();
+    }
 }

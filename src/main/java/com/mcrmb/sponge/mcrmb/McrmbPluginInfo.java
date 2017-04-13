@@ -4,7 +4,6 @@ import com.google.common.reflect.TypeToken;
 import com.mcrmb.sponge.McrmbCoreMain;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
-import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 
 import java.util.ArrayList;

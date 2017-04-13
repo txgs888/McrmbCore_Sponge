@@ -1,5 +1,6 @@
 package com.mcrmb.sponge.result;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -14,8 +15,10 @@ public class Result {
         this.code = json.get("code").getAsInt();
         this.msg = json.get("msg").getAsString();
         this.data = new ArrayList<>();
-        for (JsonElement element : json.get("data").getAsJsonArray()) {
-            this.data.add(element.getAsJsonObject());
+        if (json.get("data") instanceof JsonArray) {
+            for (JsonElement element : json.get("data").getAsJsonArray()) {
+                this.data.add(element.getAsJsonObject());
+            }
         }
     }
 
