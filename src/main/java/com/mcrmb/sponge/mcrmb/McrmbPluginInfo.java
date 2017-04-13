@@ -41,10 +41,7 @@ public class McrmbPluginInfo {
         if (config.key.equalsIgnoreCase("null")) {
             config.key = null;
         }
-        if (config.key == null || config.sid == null) {
-            McrmbCoreMain.info("当前服务器未设置SID和KEY, 请输入/b setup <sid> <key>进行设置.");
-            McrmbCoreMain.info("您可以前往 MCRMB后台->服务器管理 查看服务器的SID和KEY");
-        }
+
         config.logApi = commentedConfig.getNode("logApi").getBoolean();
         config.renewOnJoin = commentedConfig.getNode("renewOnJoin").getBoolean();
         try {

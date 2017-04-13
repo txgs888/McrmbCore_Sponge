@@ -12,8 +12,10 @@ import java.net.URLEncoder;
 
 /**
  * Created by txgs888 on 2017/4/12.
+ * 核心API
  */
-public class McrmbAPI {
+public class McrmbCoreAPI {
+
     public static CheckMoney checkMoney(String playerName) {
         try {
             playerName = playerName.toLowerCase();
