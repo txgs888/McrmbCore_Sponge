@@ -5,9 +5,9 @@ import com.google.gson.JsonObject;
 /**
  * Created by txgs888 on 2017/4/13.
  */
-public class Pay extends Result {
+public class PayResult extends Result {
 
-    public Pay(JsonObject json) {
+    public PayResult(JsonObject json) {
         super(json);
         if (getData() != null) {
             this.money = getData().get("money").getAsInt();

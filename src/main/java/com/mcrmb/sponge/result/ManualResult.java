@@ -5,9 +5,9 @@ import com.google.gson.JsonObject;
 /**
  * Created by txgs888 on 2017/4/13.
  */
-public class Manual extends Result {
+public class ManualResult extends Result {
 
-    public Manual(JsonObject json) {
+    public ManualResult(JsonObject json) {
         super(json);
     }
 }
