@@ -1,6 +1,7 @@
 package com.mcrmb.sponge;
 
 import com.mcrmb.sponge.command.BasicsCommand;
+import com.mcrmb.sponge.mcrmb.CardTypesManager;
 import com.mcrmb.sponge.mcrmb.ConfigManager;
 import com.mcrmb.sponge.mcrmb.JavaPlugin;
 import com.mcrmb.sponge.mcrmb.McrmbPluginInfo;
@@ -43,7 +44,7 @@ public class McrmbCoreMain extends JavaPlugin {
         McrmbPluginInfo.initMcrmbCore();
         registerCommand();
         getLogger().info("加载完成!");
-        McrmbCoreAPI.checkCard("txgs888","16516468994896");
+        CardTypesManager.init();
 
         Task.builder().delayTicks(0).intervalTicks(400).name("Check-SID-And-KEY").execute(task -> {
             if (McrmbPluginInfo.config.key == null || McrmbPluginInfo.config.sid == null) {

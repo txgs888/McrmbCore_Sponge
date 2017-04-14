@@ -11,8 +11,8 @@ public class CheckMoneyResult extends Result {
         super(json);
         if (getData() != null) {
             this.money = getData().get("money").getAsInt();
-            this.allcharge = getData().get("allcharge").getAsInt();
-            this.allpay = getData().get("allpay").getAsInt();
+            this.allCharge = getData().get("allcharge").getAsInt();
+            this.allPay = getData().get("allpay").getAsInt();
         }
 
     }
@@ -21,15 +21,15 @@ public class CheckMoneyResult extends Result {
         return money;
     }
 
-    public int getAllcharge() {
-        return allcharge;
+    public int getAllCharge() {
+        return allCharge;
     }
 
-    public int getAllpay() {
-        return allpay;
+    public int getAllPay() {
+        return allPay;
     }
 
     private int money = -1;
-    private int allcharge = -1;
-    private int allpay = -1;
+    private int allCharge = -1;
+    private int allPay = -1;
 }
