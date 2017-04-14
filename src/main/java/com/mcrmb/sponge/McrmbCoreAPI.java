@@ -8,6 +8,7 @@ import com.mcrmb.sponge.utils.Util;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 /**
  * Created by txgs888 on 2017/4/12.
@@ -78,4 +79,30 @@ public class McrmbCoreAPI {
             return null;
         }
     }
+
+    public static CardTypesResult cardTypes() {
+        try {
+            long time = System.currentTimeMillis() / 1000;
+            String sign = Util.md5(McrmbPluginInfo.config.sid + "Console" + time + McrmbPluginInfo.config.key);
+            return new CardTypesResult(HttpUtil.get("CardTypes?sign=" + sign + "&sid=" + McrmbPluginInfo.config.sid + "&wname=Console&time=" + time, "查询卡种类"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    /*public static ChargeResult charge(String playerName) {
+        long time = System.currentTimeMillis() / 1000;
+        String sign = Util.md5(McrmbPluginInfo.config.sid + playerName + ctype + cnum + cpwd + time + key);
+
+        s.sendMessage(prefix + "§a指令已成功发送！  请耐心等待。");
+        Bukkit.getScheduler().runTaskAsynchronously(Mcrmb.plugin, new Runnable() {
+
+            public void run() {
+                if (logapi) {
+                    System.out.println("[MCRMB] 玩家" + wname + "发起接口请求:Charge?sign=" + sign + "&sid=" + sid + "&wname=" + wname + "&ctype=" + ctype + "&cnum=" + cnum + "&cpwd=" + cpwd + "&time=" + time);
+                }
+                ArrayList arr = json.Json2Array(api + "Charge?sign=" + sign + "&sid=" + sid + "&wname=" + wname + "&ctype=" + ctype + "&cnum=" + cnum + "&cpwd=" + cpwd + "&time=" + time);
+            }
+        }
+    }*/
 }
