@@ -101,4 +101,15 @@ public class McrmbCoreAPI {
             return null;
         }
     }
+
+    public static BidResult bid(String playerName, String userName) {
+        try {
+            long time = System.currentTimeMillis() / 1000;
+            String sign = Util.md5(McrmbPluginInfo.config.sid + playerName + userName + time + McrmbPluginInfo.config.key);
+            return new BidResult(HttpUtil.get("Bid?sign=" + sign + "&sid=" + McrmbPluginInfo.config.sid + "&wname=" + playerName + "&username=" + userName + "&time=" + time, "绑定"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
