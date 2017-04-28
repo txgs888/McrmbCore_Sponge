@@ -4,11 +4,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mcrmb.sponge.McrmbCoreMain;
 import com.mcrmb.sponge.mcrmb.McrmbPluginInfo;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 
 
 /**
@@ -24,28 +24,22 @@ public class HttpUtil {
      * @param url API
      * @param reason 理由
      * @return json
-     * @throws IOException HTTP请求异常
+     * @throws Exception HTTP请求异常
      */
-    public static JsonObject get(String url, String reason) throws IOException {
+    public static JsonObject get(String url, String reason) throws Exception {
         if (McrmbPluginInfo.config.logApi) {
             McrmbCoreMain.info("发起" + reason + "请求: " + api + url);
         }
-        OkHttpClient client = getHttpClient();
-        Request request = new Request.Builder()
-                .url(api + url)
-                .header("User-Agent", java_version)
-                .header("OS-Info", os)
-                .get()
-                .build();
-        Response response = client.newCall(request).execute();
-        return new JsonParser().parse(response.body().string()).getAsJsonObject();
+        StringBuilder builder = new StringBuilder();
+        URLConnection con = new URL(url).openConnection();
+        con.setConnectTimeout(25000);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            builder.append(line);
+        }
+        reader.close();
+        return new JsonParser().parse(builder.toString()).getAsJsonObject();
     }
 
-    /***
-     * 获取一个OkHttpClient 这个方法主要是为了以后万一添加代理选项
-     * @return OkHttpClient
-     */
-    private static OkHttpClient getHttpClient() {
-        return new OkHttpClient();
-    }
 }
