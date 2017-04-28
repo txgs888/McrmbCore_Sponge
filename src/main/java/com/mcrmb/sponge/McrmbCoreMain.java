@@ -39,7 +39,7 @@ public class McrmbCoreMain extends JavaPlugin {
     public void onServerStart(GameStartedServerEvent event) { //加载插件
         instance = this;
         super.onServerStart(event);
-        getLogger().info("正在加载插件...");
+        getLogger().info("正在加载...");
         ConfigManager.init();
         McrmbPluginInfo.initMcrmbCore();
         registerCommand();

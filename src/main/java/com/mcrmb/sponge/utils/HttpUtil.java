@@ -32,6 +32,8 @@ public class HttpUtil {
         }
         StringBuilder builder = new StringBuilder();
         URLConnection con = new URL(url).openConnection();
+        con.setRequestProperty("User-Agent", java_version);
+        con.setRequestProperty("OS-Info", os);
         con.setConnectTimeout(25000);
         BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String line;
