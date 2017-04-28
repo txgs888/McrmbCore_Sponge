@@ -31,7 +31,7 @@ public class HttpUtil {
             McrmbCoreMain.info("发起" + reason + "请求: " + api + url);
         }
         StringBuilder builder = new StringBuilder();
-        URLConnection con = new URL(url).openConnection();
+        URLConnection con = new URL(api + url).openConnection();
         con.setRequestProperty("User-Agent", java_version);
         con.setRequestProperty("OS-Info", os);
         con.setConnectTimeout(25000);
