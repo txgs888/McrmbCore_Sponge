@@ -70,11 +70,8 @@ public class ConfigManager {
             setDefaultValue(config, "b", "command");
             setDefaultValue(config, "&a[&e点券中心&a] &2", "prefix");
         }
-
         configManager.save();
-
         configManagers.put(configName, configManager);
-
         return configManager;
     }
 

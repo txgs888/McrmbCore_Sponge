@@ -45,10 +45,7 @@ public class CommandProxy implements CommandExecutor {
                     if (!handler.allowConsole() && !(source instanceof Player)) {//如果命令已禁用后台执行并且执行者是后台
                         source.sendMessage(TextUtil.of("§c后台无法执行该命令."));
                     } else {//否则
-                        boolean success = handler.execute(source, args.length == 1 ? new String[0] : Util.subArray(args, 1, args.length));
-                        if (!success) {
-                            //命令没有执行成功
-                        }
+                        handler.execute(source, args.length == 1 ? new String[0] : Util.subArray(args, 1, args.length - 1));
                     }
                     return CommandResult.success();
                 }

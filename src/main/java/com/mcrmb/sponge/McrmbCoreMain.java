@@ -3,6 +3,7 @@ package com.mcrmb.sponge;
 import com.mcrmb.sponge.command.CommandProxy;
 import com.mcrmb.sponge.command.module.HelpCommand;
 import com.mcrmb.sponge.command.module.MoneyCommand;
+import com.mcrmb.sponge.command.module.SetupCommand;
 import com.mcrmb.sponge.hook.PlaceholderExpansion;
 import com.mcrmb.sponge.listener.PlayerJoinListener;
 import com.mcrmb.sponge.mcrmb.CardTypesManager;
@@ -55,7 +56,7 @@ public class McrmbCoreMain extends JavaPlugin {
         getLogger().info("加载完成!");
         CardTypesManager.init();
 
-        Task.builder().delayTicks(0).intervalTicks(400).name("Check-SID-And-KEY").execute(task -> {
+        Task.builder().delayTicks(0).intervalTicks(400).name("check-sid-and-key").execute(task -> {
             if (McrmbPluginInfo.config.key == null || McrmbPluginInfo.config.sid == null) {
                 Text waring = Text.of("§c§l当前服务器未设置SID和KEY, 请输入/b setup <sid> <key>进行设置.\n§c§l您可以前往 MCRMB后台->服务器管理 查看服务器的SID和KEY");
                 Sponge.getServer().getConsole().sendMessage(waring);
@@ -89,5 +90,6 @@ public class McrmbCoreMain extends JavaPlugin {
         //注册命令
         getCommandProxy().register(new HelpCommand());
         getCommandProxy().register(new MoneyCommand());
+        getCommandProxy().register(new SetupCommand());
     }
 }
