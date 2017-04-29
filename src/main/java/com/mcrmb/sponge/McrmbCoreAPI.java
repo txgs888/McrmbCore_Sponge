@@ -6,9 +6,7 @@ import com.mcrmb.sponge.type.ManualType;
 import com.mcrmb.sponge.utils.HttpUtil;
 import com.mcrmb.sponge.utils.Util;
 
-import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -31,10 +29,11 @@ public class McrmbCoreAPI {
             playerName = playerName.toLowerCase();
             long time = System.currentTimeMillis() / 1000;
             String sign = Util.md5(McrmbPluginInfo.config.sid + playerName + time + McrmbPluginInfo.config.key);
-            CheckMoneyResult moneyResult = new CheckMoneyResult(HttpUtil.get("CheckMoneyResult?sign=" + sign + "&sid=" + McrmbPluginInfo.config.sid + "&wname=" + playerName + "&time=" + time, "查询余额"));
+            CheckMoneyResult moneyResult = new CheckMoneyResult(HttpUtil.get("CheckMoney?sign=" + sign + "&sid=" + McrmbPluginInfo.config.sid + "&wname=" + playerName + "&time=" + time, "查询余额"));
             moneyCache.put(playerName, moneyResult);
             return moneyResult;
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
