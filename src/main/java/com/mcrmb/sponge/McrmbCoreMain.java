@@ -10,6 +10,7 @@ import com.mcrmb.sponge.mcrmb.ConfigManager;
 import com.mcrmb.sponge.mcrmb.JavaPlugin;
 import com.mcrmb.sponge.mcrmb.McrmbPluginInfo;
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
@@ -80,6 +81,8 @@ public class McrmbCoreMain extends JavaPlugin {
         CommandSpec basics = CommandSpec.builder()
                 .description(Text.of("§2mcrmb.com"))
                 .executor(commandProxy)
+                .arguments(
+                        GenericArguments.remainingRawJoinedStrings(Text.of("arg")))
                 .build();
         Sponge.getCommandManager().register(this, basics, McrmbPluginInfo.config.command);
 

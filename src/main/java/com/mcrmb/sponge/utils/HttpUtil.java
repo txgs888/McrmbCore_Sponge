@@ -2,6 +2,7 @@ package com.mcrmb.sponge.utils;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mcrmb.sponge.McrmbCoreAPI;
 import com.mcrmb.sponge.McrmbCoreMain;
 import com.mcrmb.sponge.mcrmb.McrmbPluginInfo;
 
@@ -41,6 +42,7 @@ public class HttpUtil {
             builder.append(line);
         }
         reader.close();
+        McrmbCoreMain.info("返回:" + builder.toString());
         return new JsonParser().parse(builder.toString()).getAsJsonObject();
     }
 

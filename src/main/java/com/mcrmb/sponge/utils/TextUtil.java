@@ -8,6 +8,6 @@ import org.spongepowered.api.text.Text;
  */
 public class TextUtil {
     public static Text of(String text) {
-        return Text.of(McrmbPluginInfo.config.prefix + text);
+        return Text.of(McrmbPluginInfo.config.prefix, Text.of(text));
     }
 }
