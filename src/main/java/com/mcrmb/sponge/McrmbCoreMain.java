@@ -1,6 +1,8 @@
 package com.mcrmb.sponge;
 
 import com.mcrmb.sponge.command.CommandProxy;
+import com.mcrmb.sponge.command.module.HelpCommand;
+import com.mcrmb.sponge.command.module.MoneyCommand;
 import com.mcrmb.sponge.hook.PlaceholderExpansion;
 import com.mcrmb.sponge.listener.PlayerJoinListener;
 import com.mcrmb.sponge.mcrmb.CardTypesManager;
@@ -80,5 +82,9 @@ public class McrmbCoreMain extends JavaPlugin {
                 .executor(commandProxy)
                 .build();
         Sponge.getCommandManager().register(this, basics, McrmbPluginInfo.config.command);
+
+        //注册命令
+        getCommandProxy().register(new HelpCommand());
+        getCommandProxy().register(new MoneyCommand());
     }
 }
