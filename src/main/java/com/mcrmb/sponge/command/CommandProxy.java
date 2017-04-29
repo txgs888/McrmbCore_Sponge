@@ -21,6 +21,10 @@ public class CommandProxy implements CommandExecutor {
 
     private List<CommandHandler> handlerList;
 
+    public List<CommandHandler> getHandlerList() {
+        return handlerList;
+    }
+
     public void register(CommandHandler handler) {
         if (!this.handlerList.contains(handler)) this.handlerList.add(handler);
     }
