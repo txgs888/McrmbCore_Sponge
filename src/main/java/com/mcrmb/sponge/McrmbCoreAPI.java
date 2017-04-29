@@ -9,19 +9,31 @@ import com.mcrmb.sponge.utils.Util;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by txgs888 on 2017/4/12.
  * 核心API
  */
 public class McrmbCoreAPI {
+    private static HashMap<String, CheckMoneyResult> moneyCache;
+
+    static {
+        moneyCache = new HashMap<>();
+    }
+
+    public static CheckMoneyResult checkMoneyByCache(String playerName) {
+        return moneyCache.getOrDefault(playerName.toLowerCase(), null);
+    }
 
     public static CheckMoneyResult checkMoney(String playerName) {
         try {
             playerName = playerName.toLowerCase();
             long time = System.currentTimeMillis() / 1000;
             String sign = Util.md5(McrmbPluginInfo.config.sid + playerName + time + McrmbPluginInfo.config.key);
-            return new CheckMoneyResult(HttpUtil.get("CheckMoneyResult?sign=" + sign + "&sid=" + McrmbPluginInfo.config.sid + "&wname=" + playerName + "&time=" + time, "查询余额"));
+            CheckMoneyResult moneyResult = new CheckMoneyResult(HttpUtil.get("CheckMoneyResult?sign=" + sign + "&sid=" + McrmbPluginInfo.config.sid + "&wname=" + playerName + "&time=" + time, "查询余额"));
+            moneyCache.put(playerName, moneyResult);
+            return moneyResult;
         } catch (Exception e) {
             return null;
         }
