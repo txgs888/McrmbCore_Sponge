@@ -31,11 +31,13 @@ public class MoneyCommand implements CommandHandler {
     }
 
     @Override
+    public boolean allowConsole() {
+        return false;
+    }
+
+    @Override
     public boolean execute(final CommandSource source, CommandContext context) {
-        if (!(source instanceof Player)) {
-            source.sendMessage(TextUtil.of("§c只有玩家才可以查询余额."));
-            return false;
-        }
+
         Task.builder().name("check-money")
                 .execute(new Runnable() {
                     @Override

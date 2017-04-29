@@ -8,6 +8,7 @@ import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
+import org.spongepowered.api.entity.living.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +42,13 @@ public class CommandProxy implements CommandExecutor {
             String[] args = context.<String>getOne("arg").get().split(" ");
             for (CommandHandler handler : this.handlerList) {
                 if (args[0].equalsIgnoreCase(handler.getName()) && handler.hasPermission(source)) {
-                    boolean success = handler.execute(source, context);
-                    if (!success) {
-                        //命令没有执行成功
+                    if (!handler.allowConsole() && !(source instanceof Player)) {//如果命令已禁用后台执行并且执行者是后台
+                        source.sendMessage(TextUtil.of("§c后台无法执行该命令."));
+                    } else {//否则
+                        boolean success = handler.execute(source, context);
+                        if (!success) {
+                            //命令没有执行成功
+                        }
                     }
                     return CommandResult.success();
                 }

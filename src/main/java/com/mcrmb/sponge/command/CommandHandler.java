@@ -30,6 +30,11 @@ public interface CommandHandler {
     boolean hasPermission(CommandSource source);
 
     /**
+     * 是否允许控制台运行命令
+     * @return 是否允许
+     */
+    boolean allowConsole();
+    /**
      * 执行命令
      *
      * @param source  命令来源
