@@ -67,6 +67,7 @@ public class ConfigManager {
             setDefaultValue(config, true, "renewOnJoin");
             setDefaultValue(config, new ArrayList<String>(), "opModifyWhiteList");
             setDefaultValue(config, "点券", "point");
+            setDefaultValue(config, "b", "command");
             setDefaultValue(config, "&a[&e点券中心&a] &2", "prefix");
         }
 

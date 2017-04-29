@@ -28,6 +28,7 @@ public class McrmbPluginInfo {
         public static List<String> opModifyWhiteList;
         public static Text point;
         public static Text prefix;
+        public static String command;
     }
 
 
@@ -53,7 +54,7 @@ public class McrmbPluginInfo {
         // Text.join(McrmbPluginInfo.config.prefix, Text.of("你的"), McrmbPluginInfo.config.point, Text.of("不足"))
         config.point = Text.of(commentedConfig.getNode("point").getString().replace("&", "§"));
         config.prefix = Text.of(commentedConfig.getNode("prefix").getString().replace("&", "§"));
-
+        config.command = commentedConfig.getNode("command").getString();
 
     }
 }
