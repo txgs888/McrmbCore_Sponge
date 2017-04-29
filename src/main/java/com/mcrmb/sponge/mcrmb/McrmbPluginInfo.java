@@ -1,11 +1,10 @@
 package com.mcrmb.sponge.mcrmb;
 
 import com.google.common.reflect.TypeToken;
-import com.mcrmb.sponge.McrmbCoreMain;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
-import org.spongepowered.api.text.Text;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +25,8 @@ public class McrmbPluginInfo {
         public static boolean logApi;
         public static boolean renewOnJoin;
         public static List<String> opModifyWhiteList;
-        public static Text point;
-        public static Text prefix;
+        public static String point;
+        public static String prefix;
         public static String command;
     }
 
@@ -50,11 +49,29 @@ public class McrmbPluginInfo {
         } catch (ObjectMappingException e) {
             config.opModifyWhiteList = new ArrayList<>();
         }
-        // Sponge中使用Text类来管理信息内容
-        // Text.join(McrmbPluginInfo.config.prefix, Text.of("你的"), McrmbPluginInfo.config.point, Text.of("不足"))
-        config.point = Text.of(commentedConfig.getNode("point").getString().replace("&", "§"));
-        config.prefix = Text.of(commentedConfig.getNode("prefix").getString().replace("&", "§"));
+        config.point = commentedConfig.getNode("point").getString().replace("&", "§");
+        config.prefix = commentedConfig.getNode("prefix").getString().replace("&", "§");
         config.command = commentedConfig.getNode("command").getString();
+
+    }
+
+    public static void save() {
+        try {
+            //使用反射保存config类中的所有变量
+            Class<?> configClass = Class.forName("com.mcrmb.sponge.mcrmb.McrmbPluginInfo$config");
+            Field[] fields = configClass.getDeclaredFields();
+            CommentedConfigurationNode node = ConfigManager.get().getConfig();
+            for (Field field : fields) {
+                try {
+                    node.getNode(field.getName()).setValue(field.get(configClass).toString());
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            ConfigManager.get().save();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 }
