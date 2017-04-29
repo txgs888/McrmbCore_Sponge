@@ -1,8 +1,8 @@
 package com.mcrmb.sponge.command;
 
-import com.mcrmb.sponge.McrmbCoreMain;
 import com.mcrmb.sponge.mcrmb.McrmbPluginInfo;
 import com.mcrmb.sponge.utils.TextUtil;
+import com.mcrmb.sponge.utils.Util;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -45,7 +45,7 @@ public class CommandProxy implements CommandExecutor {
                     if (!handler.allowConsole() && !(source instanceof Player)) {//如果命令已禁用后台执行并且执行者是后台
                         source.sendMessage(TextUtil.of("§c后台无法执行该命令."));
                     } else {//否则
-                        boolean success = handler.execute(source, context);
+                        boolean success = handler.execute(source, args.length == 1 ? new String[0] : Util.subArray(args, 1, args.length));
                         if (!success) {
                             //命令没有执行成功
                         }

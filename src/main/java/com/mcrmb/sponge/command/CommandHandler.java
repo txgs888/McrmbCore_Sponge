@@ -1,7 +1,6 @@
 package com.mcrmb.sponge.command;
 
 import org.spongepowered.api.command.CommandSource;
-import org.spongepowered.api.command.args.CommandContext;
 
 /**
  * Created by txgs888 on 2017/4/29.
@@ -31,16 +30,18 @@ public interface CommandHandler {
 
     /**
      * 是否允许控制台运行命令
+     *
      * @return 是否允许
      */
     boolean allowConsole();
+
     /**
      * 执行命令
      *
-     * @param source  命令来源
-     * @param context 命令参数
+     * @param source 命令来源
+     * @param args   命令参数
      * @return 是否执行成功
      */
-    boolean execute(CommandSource source, CommandContext context);
+    boolean execute(CommandSource source, String[] args);
 
 }

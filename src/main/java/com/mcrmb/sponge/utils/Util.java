@@ -1,6 +1,5 @@
 package com.mcrmb.sponge.utils;
 
-import java.math.BigInteger;
 import java.security.MessageDigest;
 
 /**
@@ -30,5 +29,11 @@ public class Util {
         }
         return hexValue.toString();
 
+    }
+
+    public static String[] subArray(String[] src, int begin, int count) {
+        String[] bs = new String[count];
+        System.arraycopy(src, begin, bs, 0, count);
+        return bs;
     }
 }
