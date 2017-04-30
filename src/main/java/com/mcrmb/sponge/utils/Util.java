@@ -46,4 +46,14 @@ public class Util {
         }
         return false;
     }
+
+    public static boolean arrayRemoveIgnoreCase(List<String> array, String value) {
+        for (String arrayValue : array) {
+            if (arrayValue.equalsIgnoreCase(value)) {
+                array.remove(arrayValue);
+                return true;
+            }
+        }
+        return false;
+    }
 }
