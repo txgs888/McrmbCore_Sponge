@@ -42,12 +42,18 @@ public class CommandProxy implements CommandExecutor {
             String[] args = context.<String>getOne("arg").get().split(" ");
             for (CommandHandler handler : this.handlerList) {
                 if (args[0].equalsIgnoreCase(handler.getName()) && handler.hasPermission(source)) {
-                    if (!handler.allowConsole() && !(source instanceof Player)) {//如果命令已禁用后台执行并且执行者是后台
-                        source.sendMessage(TextUtil.of("§c后台无法执行该命令."));
+                    if (!handler.hasPermission(source)) {//如果命令已禁用后台执行并且执行者是后台
+                        if (source instanceof Player) {
+                            source.sendMessage(TextUtil.of("§c你没有执行该命令的权限."));
+                        } else {
+                            source.sendMessage(TextUtil.of("§c后台无法执行该命令."));
+                        }
+
                     } else {//否则
                         handler.execute(source, args.length == 1 ? new String[0] : Util.subArray(args, 1, args.length - 1));
+                        return CommandResult.success();
                     }
-                    return CommandResult.success();
+
                 }
             }
         }

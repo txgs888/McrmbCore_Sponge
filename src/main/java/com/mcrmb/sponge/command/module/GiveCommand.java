@@ -32,11 +32,6 @@ public class GiveCommand implements CommandHandler {
     }
 
     @Override
-    public boolean allowConsole() {
-        return true;
-    }
-
-    @Override
     public boolean execute(CommandSource source, String[] args) {
         if ((args.length != 2 && args.length != 3) || !StringUtils.isNumeric(args[1])) {
             source.sendMessage(TextUtil.of("§c/" + McrmbPluginInfo.config.command + " give <玩家> <增加数量> [理由]"));

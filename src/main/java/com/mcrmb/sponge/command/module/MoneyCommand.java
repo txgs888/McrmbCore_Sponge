@@ -6,6 +6,7 @@ import com.mcrmb.sponge.command.CommandHandler;
 import com.mcrmb.sponge.result.CheckMoneyResult;
 import com.mcrmb.sponge.utils.TextUtil;
 import org.spongepowered.api.command.CommandSource;
+import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.scheduler.Task;
 
 /**
@@ -24,12 +25,7 @@ public class MoneyCommand implements CommandHandler {
 
     @Override
     public boolean hasPermission(CommandSource source) {
-        return true;
-    }
-
-    @Override
-    public boolean allowConsole() {
-        return false;
+        return source instanceof Player;
     }
 
     @Override

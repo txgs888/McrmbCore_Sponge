@@ -26,12 +26,6 @@ public class SetupCommand implements CommandHandler {
     public boolean hasPermission(CommandSource source) {
         return source.hasPermission("mcrmb.admin");
     }
-
-    @Override
-    public boolean allowConsole() {
-        return true;
-    }
-
     @Override
     public boolean execute(CommandSource source, String[] args) {
         if (args.length != 2) {

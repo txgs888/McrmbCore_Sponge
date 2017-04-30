@@ -31,11 +31,6 @@ public class HelpCommand implements CommandHandler {
     }
 
     @Override
-    public boolean allowConsole() {
-        return true;
-    }
-
-    @Override
     public boolean execute(CommandSource source, String[] args) {
         List<Text> messages = new ArrayList<>();
         for (CommandHandler handler : McrmbCoreMain.instance().getCommandProxy().getHandlerList()) {

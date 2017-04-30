@@ -32,11 +32,6 @@ public class SetCommand implements CommandHandler {
     }
 
     @Override
-    public boolean allowConsole() {
-        return true;
-    }
-
-    @Override
     public boolean execute(CommandSource source, String[] args) {
         if ((args.length != 2 && args.length != 3) || !StringUtils.isNumeric(args[1])) {
             source.sendMessage(TextUtil.of("§c/" + McrmbPluginInfo.config.command + " set <玩家> <设置数量> [理由]"));
