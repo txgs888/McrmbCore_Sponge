@@ -44,10 +44,10 @@ public class McrmbPluginInfo {
 
         config.logApi = commentedConfig.getNode("logApi").getBoolean();
         config.renewOnJoin = commentedConfig.getNode("renewOnJoin").getBoolean();
+        config.opModifyWhiteList = new ArrayList<>();
         try {
-            config.opModifyWhiteList = commentedConfig.getNode("opModifyWhiteList").getList(TypeToken.of(String.class));
+            config.opModifyWhiteList.addAll(commentedConfig.getNode("opModifyWhiteList").getList(TypeToken.of(String.class)));
         } catch (ObjectMappingException e) {
-            config.opModifyWhiteList = new ArrayList<>();
         }
         config.point = commentedConfig.getNode("point").getString().replace("&", "§");
         config.prefix = commentedConfig.getNode("prefix").getString().replace("&", "§");
