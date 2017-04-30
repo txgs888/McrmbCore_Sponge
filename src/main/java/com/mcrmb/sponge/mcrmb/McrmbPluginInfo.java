@@ -63,15 +63,7 @@ public class McrmbPluginInfo {
             CommentedConfigurationNode node = ConfigManager.get().getConfig();
             for (Field field : fields) {
                 try {
-                    Object object = field.get(configClass);
-                    if (object instanceof String) {
-                        node.getNode(field.getName()).setValue((String) field.get(configClass));
-                    } else if (object instanceof List<?>) {
-                        node.getNode(field.getName()).setValue((List<String>) field.get(configClass));
-                    } else if (object instanceof Boolean) {
-                        node.getNode(field.getName()).setValue((boolean) field.get(configClass));
-                    }
-
+                    node.getNode(field.getName()).setValue(field.get(configClass));
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
