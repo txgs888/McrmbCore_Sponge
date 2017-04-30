@@ -1,6 +1,7 @@
 package com.mcrmb.sponge.utils;
 
 import java.security.MessageDigest;
+import java.util.List;
 
 /**
  * Created by txgs888 on 2017/4/12.
@@ -35,5 +36,14 @@ public class Util {
         String[] bs = new String[count];
         System.arraycopy(src, begin, bs, 0, count);
         return bs;
+    }
+
+    public static boolean arrayEqualsIgnoreCase(List<String> array, String value) {
+        for (String arrayValue : array) {
+            if (arrayValue.equalsIgnoreCase(value)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
