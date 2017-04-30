@@ -44,7 +44,7 @@ public class McrmbCoreAPI {
             long time = System.currentTimeMillis() / 1000;
             String sign = Util.md5(McrmbPluginInfo.config.sid + playerName + type + URLEncoder.encode(reason, "UTF-8") + money + time + McrmbPluginInfo.config.key);
             String typeName = (type.equals(ManualType.ADD) ? "加款" : type.equals(ManualType.TAKE) ? "扣款" : type.equals(ManualType.RESET) ? "重设点券" : "未知") + "(" + reason + ")";
-            return new ManualResult(HttpUtil.get("ManualResult?sign=" + sign + "&sid=" + McrmbPluginInfo.config.sid
+            return new ManualResult(HttpUtil.get("Manual?sign=" + sign + "&sid=" + McrmbPluginInfo.config.sid
                     + "&wname=" + playerName + "&type=" + type + "&text=" + URLEncoder.encode(reason, "UTF-8") + "&money=" + money + "&time=" + time, typeName));
         } catch (Exception e) {
             return null;
