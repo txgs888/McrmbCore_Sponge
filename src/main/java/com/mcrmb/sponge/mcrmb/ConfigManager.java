@@ -25,7 +25,6 @@ public class ConfigManager {
     private ConfigManager(String configName) {
         try {
             path = McrmbCoreMain.instance().getPath().resolve(configName + ".conf");
-
             if (!Files.exists(path)) {
                 Files.createFile(path);
                 McrmbCoreMain.instance().getLogger().info("创建新的配置文件: " + path.getFileName());

@@ -57,7 +57,7 @@ public class McrmbCoreAPI {
             playerName = playerName.toLowerCase();
             long time = System.currentTimeMillis() / 1000;
             String sign = Util.md5(McrmbPluginInfo.config.sid + playerName + URLEncoder.encode(reason, "UTF-8") + money + time + McrmbPluginInfo.config.key);
-            return new PayResult(HttpUtil.get("PayResult?sign=" + sign + "&sid=" + McrmbPluginInfo.config.sid
+            return new PayResult(HttpUtil.get("Pay?sign=" + sign + "&sid=" + McrmbPluginInfo.config.sid
                     + "&wname=" + playerName + "&use=" + URLEncoder.encode(reason, "UTF-8") + "&money=" + money + "&time=" + time, "支付(" + reason + ")"));
         } catch (Exception e) {
             e.printStackTrace();
