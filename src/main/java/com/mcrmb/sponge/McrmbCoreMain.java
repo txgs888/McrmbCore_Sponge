@@ -92,5 +92,6 @@ public class McrmbCoreMain extends JavaPlugin {
         getCommandProxy().register(new TakeCommand());
         getCommandProxy().register(new GiveCommand());
         getCommandProxy().register(new SetCommand());
+        getCommandProxy().register(new AdminWhiteCommand());
     }
 }
