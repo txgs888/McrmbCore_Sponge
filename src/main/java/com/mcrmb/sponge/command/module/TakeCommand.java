@@ -9,6 +9,7 @@ import com.mcrmb.sponge.type.ManualType;
 import com.mcrmb.sponge.utils.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.spongepowered.api.command.CommandSource;
+import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.scheduler.Task;
 
 /**
@@ -41,7 +42,7 @@ public class TakeCommand implements CommandHandler {
             source.sendMessage(TextUtil.of("§c/" + McrmbPluginInfo.config.command + " take <玩家> <扣除数量> [理由]"));
             return true;
         }
-        if (!McrmbPluginInfo.config.opModifyWhiteList.contains(source.getName())) {
+        if (source instanceof Player && !McrmbPluginInfo.config.opModifyWhiteList.contains(source.getName())) {
             source.sendMessage(TextUtil.of("§c你无法执行该操作,你可以在后台输入/" + McrmbPluginInfo.config.command + " adminwhite add <你的ID> 来添加你到操作点券白名单"));
             return true;
         }
@@ -54,6 +55,6 @@ public class TakeCommand implements CommandHandler {
                     }
                     source.sendMessage(TextUtil.of("§2扣款成功,返回信息: §a" + result.getMsg()));
                 }).submit(McrmbCoreMain.instance());
-        return false;
+        return true;
     }
 }
