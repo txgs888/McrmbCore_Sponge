@@ -10,8 +10,10 @@ public class PayResult extends Result {
     public PayResult(JsonObject json) {
         super(json);
         if (getData() != null) {
-            this.money = getData().get("money").getAsInt();
-            this.need = getData().get("need").getAsInt();
+            if (getData().get("money") != null)
+                this.money = getData().get("money").getAsInt();
+            if (getData().get("need") != null)
+                this.need = getData().get("need").getAsInt();
         }
     }
 
