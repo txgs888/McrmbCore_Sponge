@@ -6,6 +6,7 @@ import com.mcrmb.sponge.McrmbCoreMain;
 import com.mcrmb.sponge.mcrmb.McrmbPluginInfo;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -26,7 +27,7 @@ public class HttpUtil {
      * @return json
      * @throws Exception HTTP请求异常
      */
-    public static JsonObject get(String url, String reason) throws Exception {
+    public static JsonObject get(String url, String reason) throws IOException {
         if (McrmbPluginInfo.config.logApi) {
             McrmbCoreMain.info("发起" + reason + "请求: " + api + url);
         }
@@ -44,4 +45,18 @@ public class HttpUtil {
         return new JsonParser().parse(builder.toString()).getAsJsonObject();
     }
 
+    public static String get(String url) throws IOException {
+        StringBuilder builder = new StringBuilder();
+        URLConnection con = new URL(url).openConnection();
+        con.setRequestProperty("User-Agent", java_version);
+        con.setRequestProperty("OS-Info", os);
+        con.setConnectTimeout(10000);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            builder.append(line);
+        }
+        reader.close();
+        return builder.toString();
+    }
 }
