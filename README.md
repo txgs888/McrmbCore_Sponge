@@ -7,7 +7,7 @@
 
 管理员命令权限: mcrmb.admin
 
-[插件下载](https://github.com/txgs888/McrmbCore_Sponge/releases/tag/1.0.0-SNAPSHOT)
+[插件下载](https://github.com/txgs888/McrmbCore_Sponge/releases/)
 
 # Maven
 ```xml
