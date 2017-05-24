@@ -46,7 +46,9 @@ public class TestCommand implements CommandHandler {
                     } catch (IOException e) {
                         e.printStackTrace();
                         source.sendMessage(TextUtil.of("§c连接MCRMB错误,请联系MCRMB管理员."));
+                        return;
                     }
+                    source.sendMessage(TextUtil.of("§2你的网络环境正常."));
                 }).submit(McrmbCoreMain.instance());
 
         return true;
